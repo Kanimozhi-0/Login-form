@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<!-- saved from url=(0031)http://127.0.0.1:5500/kani.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Professional Login System</title>
+
+<link href="./index_files/css2" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(-45deg,#667eea,#764ba2,#ff512f,#dd2476);
+    background-size:400% 400%;
+    animation:gradientBG 8s ease infinite;
+}
+
+@keyframes gradientBG{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+.container{
+    width:380px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(20px);
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.3);
+    color:white;
+    text-align:center;
+}
+
+h2{
+    margin-bottom:30px;
+}
+
+.input-group{
+    position:relative;
+    margin-bottom:25px;
+}
+
+.input-group input{
+    width:100%;
+    padding:14px;
+    border:none;
+    outline:none;
+    border-radius:10px;
+    background:rgba(255,255,255,0.2);
+    color:white;
+    font-size:14px;
+}
+
+.input-group label{
+    position:absolute;
+    left:15px;
+    top:14px;
+    color:#ddd;
+    font-size:14px;
+    transition:0.3s;
+    pointer-events:none;
+}
+
+.input-group input:focus + label,
+.input-group input:valid + label{
+    top:-10px;
+    left:10px;
+    font-size:12px;
+    background:#764ba2;
+    padding:2px 8px;
+    border-radius:6px;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:linear-gradient(90deg,#00ffcc,#00b3ff);
+    color:#000;
+    font-weight:600;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.05);
+    box-shadow:0 10px 25px rgba(0,0,0,0.3);
+}
+
+.message{
+    margin-top:15px;
+    font-size:14px;
+    font-weight:500;
+}
+
+/* Success Page */
+.success-page{
+    display:none;
+}
+
+.success-page h1{
+    font-size:24px;
+    margin-bottom:15px;
+    color:#00ffcc;
+}
+
+.success-page p{
+    margin-bottom:20px;
+}
+
+.logout-btn{
+    background:linear-gradient(90deg,#ff512f,#dd2476);
+    color:white;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Login Form -->
+<div class="container" id="loginContainer" style="display: block;">
+    <h2>Login</h2>
+
+    <form id="loginForm">
+
+        <div class="input-group">
+            <input type="text" id="username" required="" fdprocessedid="82tr3m">
+            <label>Username</label>
+        </div>
+
+        <div class="input-group">
+            <input type="password" id="password" required="" fdprocessedid="jk1z2d">
+            <label>Password</label>
+        </div>
+
+        <button type="submit" fdprocessedid="ccyk5">Login</button>
+
+        <div class="message" id="message" style="color: rgb(255, 77, 77);"></div>
+
+    </form>
+</div>
+
+<!-- Success Page -->
+<div class="container success-page" id="successPage" style="display: none;">
+    <h1>🎉 Logged In Successfully!</h1>
+    <p id="welcomeUser">Welcome, admin 👋</p>
+    <button class="logout-btn" onclick="logout()" fdprocessedid="nzr23b">Logout</button>
+</div>
+
+<script>
+const loginForm = document.getElementById("loginForm");
+const message = document.getElementById("message");
+const loginContainer = document.getElementById("loginContainer");
+const successPage = document.getElementById("successPage");
+const welcomeUser = document.getElementById("welcomeUser");
+
+// Demo Credentials
+const demoUsername = "admin";
+const demoPassword = "12345";
+
+loginForm.addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    if(username === demoUsername && password === demoPassword){
+        loginContainer.style.display = "none";
+        successPage.style.display = "block";
+        welcomeUser.innerText = "Welcome, " + username + " 👋";
+    }else{
+        message.style.color = "#ff4d4d";
+        message.innerText = "Invalid Username or Password ❌";
+    }
+});
+
+function logout(){
+    successPage.style.display = "none";
+    loginContainer.style.display = "block";
+    loginForm.reset();
+    message.innerText = "";
+}
+</script>
+
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+<span id="PING_IFRAME_FORM_DETECTION" style="display: none;"></span></body></html>
